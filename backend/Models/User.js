@@ -1,22 +1,40 @@
-const mongoose=require('mongoose');
-const Schema=mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-
-const UserSchema=new Schema({
-    name:{
-        type:String,
+// Define schema for individual space
+const SpaceSchema = new Schema({
+    name: {
+        type: String,
         required: true,
     },
-    email:{
-        type:String,
-        required:true,
-        unique: true,
+    feedbackCount: {
+        type: Number,
+        default: 0, // Initialize feedback count to 0
     },
-    password:{
-        type:String,
-        required: true,
-    }
 });
 
-const UserModel=mongoose.model('users', UserSchema);
+// Define schema for user
+const UserSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+    spaces: [SpaceSchema], // Array of spaces
+    totalSpaces: {
+        type: Number,
+        default: 0, // Initialize total spaces to 0
+    },
+});
+
+// Create and export the User model
+const UserModel = mongoose.model('User', UserSchema);
 module.exports = UserModel;
