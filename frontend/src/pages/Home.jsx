@@ -6,24 +6,12 @@ import '../styles/dashboard.css'; // Import the CSS for styling
 
 const Home = () => {
   const [loggedInUser, setLoggedInUser] = useState('');
-  const [spaces, setSpaces] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch user info from local storage
     setLoggedInUser(localStorage.getItem('loggedInUser'));
 
-    // Fetch spaces data (replace with your API logic)
-    const fetchSpacesData = async () => {
-      // Example placeholder data, replace with actual API call
-      const fetchedSpaces = [
-        { id: 1, name: 'Space 1', feedbackCount: 10 },
-        { id: 2, name: 'Space 2', feedbackCount: 8 },
-      ];
-      setSpaces(fetchedSpaces);
-    };
-
-    fetchSpacesData();
   }, []);
 
   const handleLogout = () => {
@@ -35,9 +23,6 @@ const Home = () => {
     }, 1000);
   };
 
-  const handleViewSpaces = () => {
-    navigate('/spaces'); // Navigate to the spaces details page
-  };
 
   return (
     <div className="dashboard-container">
@@ -47,12 +32,6 @@ const Home = () => {
         <button className="logout-btn" onClick={handleLogout}>
           Logout
         </button>
-      </div>
-
-      {/* Total Spaces section */}
-      <div className="dashboard-item" onClick={handleViewSpaces}>
-        <h2>{spaces.length}</h2>
-        <p>Total Spaces</p>
       </div>
 
       {/* Create Space button */}
